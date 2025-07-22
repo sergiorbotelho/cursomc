@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.cursomc.domain.enums.TipoCliente;
@@ -28,7 +29,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	private String email;
-	private String cpoOuCnpj;
+	private String cpfOuCnpj;
 	private Integer tipoCliente;
 	
 	@JsonManagedReference
@@ -39,18 +40,19 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpoOuCnpj, TipoCliente tipoCliente) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.cpoOuCnpj = cpoOuCnpj;
+		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipoCliente = tipoCliente.getCod();
 	}
 
@@ -78,12 +80,12 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpoOuCnpj() {
-		return cpoOuCnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setCpoOuCnpj(String cpoOuCnpj) {
-		this.cpoOuCnpj = cpoOuCnpj;
+	public void setCpfOuCnpj(String cpoOuCnpj) {
+		this.cpfOuCnpj = cpoOuCnpj;
 	}
 
 	public TipoCliente getTipoCliente() {
